@@ -3,7 +3,7 @@
 * @Usernames: ckim65, tpluu
 * @Date:   2018-01-17 01:44:58
 * @Last Modified by:   tpluu
-* @Last Modified time: 2018-01-19 15:02:37
+* @Last Modified time: 2018-01-19 15:22:33
 */
 
 import java.util.*;
@@ -21,6 +21,9 @@ public class SortCounts {
 
         Random ran = new Random();
         Sorts1 sort = new Sorts1();
+
+        System.out.println("Average number of element-comparisons in three sorting algorithms:");
+        System.out.println();
 
         // generates different sizes for each array
         for(int size = 100; size <= 12800; size*=2) {
@@ -58,6 +61,9 @@ public class SortCounts {
             }
             displayResults(size, avgSS/100, avgMS/100, avgQS/100);
         }
+
+        System.out.println();
+        System.out.println("End of output");
     }
 
     // displays the number of elements and the times for each sort
