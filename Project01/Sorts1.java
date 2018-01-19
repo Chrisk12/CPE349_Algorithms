@@ -1,21 +1,27 @@
 /*
 * @Author: Chris Kim, Thinh Luu
 * @Usernames: ckim65, tpluu
-* @Date:   2018-01-10 09:16:14
+* @Date:   2018-01-17 01:14:20
 * @Last Modified by:   Chris Kim
-* @Last Modified time: 2018-01-19 10:17:47
+* @Last Modified time: 2018-01-19 10:08:43
 */
 import java.util.Random;
 import java.util.Arrays;
 
-public class Sorts {
-    public static void selectionSort(int[] arr, int N) {
+public class Sorts1 {
+
+    private static int selectionCount;
+    private static int mergeCount;
+    private static int quickCount;
+
+    public static int selectionSort(int[] arr, int N) {
 
         for (int i = 0; i < N; i++) {
 
             int temp = i;
             for (int j = i; j < N; j++) {
 
+                selectionCount++;
                 if (arr[temp] > arr[j]) {
 
                     temp = j;
@@ -26,11 +32,17 @@ public class Sorts {
             swap(arr,i,temp);
 
         }
+        int rtnCount = selectionCount;
+        selectionCount = 0;
+        return rtnCount;
     }
 
-    public static void mergeSort(int [] arr, int N) {
+    public static int mergeSort(int [] arr, int N) {
        
         mergeSort(arr, 0, (N-1));
+        int rtnCount = mergeCount;
+        mergeCount = 0;
+        return rtnCount;
 
     }
 
@@ -56,6 +68,7 @@ public class Sorts {
 
         while(indexLeft <= middle && indexRight <=right) {
 
+            mergeCount++;
             if (arr[indexLeft] < arr[indexRight]) {
 
                 
@@ -106,9 +119,12 @@ public class Sorts {
 
     }
 
-    public static void quickSort(int [] list, int N) {
+    public static int quickSort(int [] list, int N) {
        
         quickSort(list, 0, N-1);
+        int rtnCount = quickCount;
+        quickCount = 0;
+        return rtnCount;
 
     }
 
@@ -145,7 +161,7 @@ public class Sorts {
 
         }
 
-
+        quickCount += 3;
 
     }
 
@@ -155,15 +171,16 @@ public class Sorts {
         int indexRight = right - 1;
         int pivot = arr[right];
         while (indexRight >= indexLeft) {
-
+        
+            quickCount++;
             while(arr[indexLeft] < pivot) {
-
+                quickCount++;
                 indexLeft++;
 
             }
 
             while (indexRight >= indexLeft) {
-
+                quickCount++;
                 if (arr[indexRight] > pivot) {
 
                     indexRight--;
@@ -252,5 +269,6 @@ public class Sorts {
         System.out.println("NEW ARRAY ARR: " + Arrays.toString(arr));
 
     }
+
 
 }
