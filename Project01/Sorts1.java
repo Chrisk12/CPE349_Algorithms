@@ -2,8 +2,8 @@
 * @Author: Chris Kim, Thinh Luu
 * @Usernames: ckim65, tpluu
 * @Date:   2018-01-17 01:14:20
-* @Last Modified by:   Chris Kim
-* @Last Modified time: 2018-01-19 10:08:43
+* @Last Modified by:   tpluu
+* @Last Modified time: 2018-01-19 14:41:15
 */
 import java.util.Random;
 import java.util.Arrays;
@@ -16,10 +16,10 @@ public class Sorts1 {
 
     public static int selectionSort(int[] arr, int N) {
 
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < N-1; i++) {
 
             int temp = i;
-            for (int j = i; j < N; j++) {
+            for (int j = i+1; j < N; j++) {
 
                 selectionCount++;
                 if (arr[temp] > arr[j]) {

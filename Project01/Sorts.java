@@ -2,8 +2,8 @@
 * @Author: Chris Kim, Thinh Luu
 * @Usernames: ckim65, tpluu
 * @Date:   2018-01-10 09:16:14
-* @Last Modified by:   Chris Kim
-* @Last Modified time: 2018-01-19 10:17:47
+* @Last Modified by:   tpluu
+* @Last Modified time: 2018-01-19 15:03:20
 */
 import java.util.Random;
 import java.util.Arrays;
@@ -11,10 +11,10 @@ import java.util.Arrays;
 public class Sorts {
     public static void selectionSort(int[] arr, int N) {
 
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < N-1; i++) {
 
             int temp = i;
-            for (int j = i; j < N; j++) {
+            for (int j = i+1; j < N; j++) {
 
                 if (arr[temp] > arr[j]) {
 
@@ -24,7 +24,6 @@ public class Sorts {
 
             }
             swap(arr,i,temp);
-
         }
     }
 
@@ -44,7 +43,6 @@ public class Sorts {
             mergeSortedHalves(list, first, middle, last);
 
         }
-
     }
 
     private static void mergeSortedHalves(int[] arr, int left, int middle, int right) {
@@ -78,7 +76,6 @@ public class Sorts {
                 indexLeft++;
 
             }
-
         }
 
         while (indexLeft <= middle) {
@@ -86,7 +83,7 @@ public class Sorts {
             temp[index] = arr[indexLeft];
             index++;
             indexLeft++;
-          
+
         }
         while (indexRight <= right) {
 
@@ -122,7 +119,6 @@ public class Sorts {
             quickSort(list, pivotIndex + 1, last);
 
         }
-
     }
 
     private static void setPivotToEnd(int[] arr, int left, int right) {
@@ -144,9 +140,6 @@ public class Sorts {
             swap(arr,center,right);
 
         }
-
-
-
     }
 
     private static int splitList(int[] arr, int left, int right) {

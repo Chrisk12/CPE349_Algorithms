@@ -2,8 +2,8 @@
 * @Author: Chris Kim, Thinh Luu
 * @Usernames: ckim65, tpluu
 * @Date:   2018-01-10 09:16:14
-* @Last Modified by:   Chris Kim
-* @Last Modified time: 2018-01-19 10:09:08
+* @Last Modified by:   tpluu
+* @Last Modified time: 2018-01-19 14:46:05
 */
 
 import java.util.*;
@@ -35,7 +35,7 @@ public class SortTimes {
                 
                 for(int j = 0; j < array1.length; j++) {
 
-                    array1[j] = ran.nextInt(500);
+                    array1[j] = ran.nextInt(size);
                 }
 
                 int[] array2 = new int[160000];
