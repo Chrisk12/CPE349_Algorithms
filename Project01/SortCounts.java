@@ -3,7 +3,7 @@
 * @Usernames: ckim65, tpluu
 * @Date:   2018-01-17 01:44:58
 * @Last Modified by:   Chris Kim
-* @Last Modified time: 2018-01-19 09:59:49
+* @Last Modified time: 2018-01-19 10:19:11
 */
 
 import java.util.*;
@@ -59,7 +59,7 @@ public class SortCounts {
 
                 
             }
-)            displayResults(size, avgSS/100, avgMS/100, avgQS/100);
+            displayResults(size, avgSS/100, avgMS/100, avgQS/100);
         }
     }
 
