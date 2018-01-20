@@ -2,8 +2,8 @@
 * @Author: Chris Kim, Thinh Luu
 * @Usernames: ckim65, tpluu
 * @Date:   2018-01-10 09:16:14
-* @Last Modified by:   Chris Kim
-* @Last Modified time: 2018-01-19 10:09:08
+* @Last Modified by:   tpluu
+* @Last Modified time: 2018-01-19 15:26:35
 */
 
 import java.util.*;
@@ -24,6 +24,9 @@ public class SortTimes {
 
         startTime = System.nanoTime() / 1000000;
 
+        System.out.println("Running Times of three sorting algorithms:");
+        System.out.println();
+
         // generates different sizes for each array
         for(int size = 5000; size <= 160000; size*=2) {
 
@@ -35,7 +38,7 @@ public class SortTimes {
                 
                 for(int j = 0; j < array1.length; j++) {
 
-                    array1[j] = ran.nextInt(500);
+                    array1[j] = ran.nextInt(size);
                 }
 
                 int[] array2 = new int[160000];
@@ -66,6 +69,8 @@ public class SortTimes {
             }
             System.out.println();
         }
+
+        System.out.println("End of output");
     }
 
     // displays the number of elements and the times for each sort

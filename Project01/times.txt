@@ -1,0 +1,39 @@
+Running Times of three sorting algorithms:
+
+N=5000: T_ss=15, T_ms=2, T_qs=2
+N=5000: T_ss=17, T_ms=1, T_qs=0
+N=5000: T_ss=7, T_ms=1, T_qs=1
+N=5000: T_ss=8, T_ms=1, T_qs=0
+N=5000: T_ss=8, T_ms=1, T_qs=0
+
+N=10000: T_ss=29, T_ms=2, T_qs=1
+N=10000: T_ss=29, T_ms=2, T_qs=0
+N=10000: T_ss=29, T_ms=1, T_qs=1
+N=10000: T_ss=29, T_ms=2, T_qs=1
+N=10000: T_ss=29, T_ms=2, T_qs=0
+
+N=20000: T_ss=118, T_ms=4, T_qs=2
+N=20000: T_ss=121, T_ms=3, T_qs=2
+N=20000: T_ss=118, T_ms=3, T_qs=2
+N=20000: T_ss=115, T_ms=3, T_qs=1
+N=20000: T_ss=115, T_ms=2, T_qs=2
+
+N=40000: T_ss=478, T_ms=6, T_qs=3
+N=40000: T_ss=461, T_ms=6, T_qs=3
+N=40000: T_ss=466, T_ms=6, T_qs=3
+N=40000: T_ss=462, T_ms=6, T_qs=3
+N=40000: T_ss=464, T_ms=7, T_qs=3
+
+N=80000: T_ss=1863, T_ms=14, T_qs=7
+N=80000: T_ss=1851, T_ms=14, T_qs=7
+N=80000: T_ss=1854, T_ms=14, T_qs=9
+N=80000: T_ss=2068, T_ms=15, T_qs=7
+N=80000: T_ss=2015, T_ms=12, T_qs=7
+
+N=160000: T_ss=8189, T_ms=25, T_qs=15
+N=160000: T_ss=7428, T_ms=27, T_qs=15
+N=160000: T_ss=7438, T_ms=26, T_qs=15
+N=160000: T_ss=7424, T_ms=27, T_qs=15
+N=160000: T_ss=7419, T_ms=26, T_qs=15
+
+End of output
