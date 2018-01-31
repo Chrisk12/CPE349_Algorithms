@@ -62,8 +62,8 @@ public class TestDriver{
 
          //Computing Product
          try{
-            MatrixProduct mp = new MatrixProduct();
-            product = mp.matrixProduct_DAC(A,B);
+            FakeStrassen mp = new FakeStrassen();
+            product = mp.matrixProduct_Strassen(A,B);
             printMatrix(product, numRowA, numColB);
          }
          catch(IllegalArgumentException e) {
