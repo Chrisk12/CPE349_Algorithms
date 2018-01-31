@@ -1,8 +1,8 @@
 /*
 * @Author: Thinh Luu, Chris Kim
 * @Date:   2018-01-29 23:15:14
-* @Last Modified by:   thinhluu
-* @Last Modified time: 2018-01-30 02:23:34
+* @Last Modified by:   Chris Kim
+* @Last Modified time: 2018-01-30 17:58:04
 */
 
 import java.util.*;
@@ -78,24 +78,69 @@ public class MatrixProduct {
       checkInputs(A,B);
    }
 
-   //private recrusive method; first array: A, second array B
+   // private recrusive method; first array: A, second array B
    private static int[][] matrixProduct_Strassen(int[][] A, int startrowA, int startcolA, int[][] B, int startrowB, int startcolB, int n) {
 
       int[][] product = new int[n][n];
 
       //base case
       if(n == 1) {
+         
          product[0][0] = A[startrowA][startcolA] * B[startrowB][startcolB];
+      
       }
       else {
          int newSize = n/2;
 
+         // P1 = A11 * (S1=B12-B22)
+         matrixProduct_Strassen(A,startrowA,startcolA, 
+            sub_Strassen(B, startrowB, startcolB + newSize, B, startrowB + newSize, startcolB + newSize, newSize)
+
+         //product_12
+         add_DAC(
+            matrixProduct_DAC(A,startrowA,startcolA,B, startrowB,startcolB+newSize, newSize), 
+            matrixProduct_DAC(A,startrowA,startcolA+newSize,B, startrowB+newSize,startcolB+newSize, newSize),
+            product, 0, newSize);
+
+
+         //product_21
+         add_DAC(
+            matrixProduct_DAC(A,startrowA+newSize,startcolA,B, startrowB,startcolB, newSize), 
+            matrixProduct_DAC(A,startrowA+newSize,startcolA+newSize,B, startrowB+newSize,startcolB, newSize),
+            product, newSize, 0);
+
+         //product_22
+         add_DAC(
+            matrixProduct_DAC(A,startrowA+newSize,startcolA,B, startrowB,startcolB+newSize, newSize), 
+            matrixProduct_DAC(A,startrowA+newSize,startcolA+newSize,B, startrowB+newSize,startcolB+newSize, newSize),
+            product, newSize, newSize);
 
       }
+      return product
    } 
 
-   private void add_Strassen()
+   private void add_Strassen(int[][] A, int startrowA, int startcolA, int[][] B, int startrowB, int startcolB, int n) {
 
+      int size = A.length;
+
+      for(int i = 0; i < size; i++){
+         for (int j = 0; j < size; j++) {
+            Product[i+startrowProduct][j+startcolProduct] = A[i][j]+B[i][j];
+         }
+      }
+
+   }
+
+   private void sub_Strassen(int[][] A, int startrowA, int startcolA, int[][] B, int startrowB, int startcolB, int n) {
+
+
+      for(int i = 0; i < n; i++){
+         for (int j = 0; j < n; j++) {
+            Product[i+startrowProduct][j+startcolProduct] = A[i][j]-B[i][j];
+         }
+      }
+
+   }
 
 
    private static void checkInputs(int[][] A, int[][] B) {
