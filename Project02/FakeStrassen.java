@@ -7,7 +7,7 @@
 
 import java.util.*;
 
-public class MatrixProduct {
+public class FakeStrassen {
 
    //Public divide and conquer Matrix Multiplication
    public static int[][] matrixProduct_DAC(int[][] A, int[][] B) {
@@ -102,7 +102,7 @@ public class MatrixProduct {
                   add_Strassen(
 
                      //P5 = (S5 = A11 + A22) * (S6 = B11 + B22)
-                     matrixProduct_Strassen(
+                     matrixProduct_DAC(
 
                         //S5 = A11 + A22
                         add_Strassen(
@@ -121,7 +121,7 @@ public class MatrixProduct {
 
                      ), startrowA + newSize, startcolA + newSize,
                      //P4 = A22 * (S4 = B21 - B11)
-                     matrixProduct_Strassen( 
+                     matrixProduct_DAC( 
 
                         A, startrowA + newSize, startcolA + newSize,
                         //S4 = B21 - B11
@@ -135,7 +135,7 @@ public class MatrixProduct {
                ), startrowA + newSize, startrowA + newSize,
                
                //P2 = (S2 = A11 + A12) * B22              
-               matrixProduct_Strassen(
+               matrixProduct_DAC(
                   add_Strassen(
                      A, startrowA, startcolA, 
                      A, startrowA, startcolA+newSize, 
@@ -147,7 +147,7 @@ public class MatrixProduct {
                newSize
             ), 0, 0,
             // P6 = (S7 = A12 - A22) * (S8 = B21 + B22)
-            matrixProduct_Strassen(
+            matrixProduct_DAC(
 
                //S7 = A12 - A22
                sub_Strassen(
@@ -175,7 +175,7 @@ public class MatrixProduct {
             product,
             add_Strassen(
                // P1 = A11 * (S1=B12-B22)
-               matrixProduct_Strassen(
+               matrixProduct_DAC(
                   A, startrowA, startcolA, 
                   sub_Strassen(
                      B, startrowB, startcolB + newSize, 
@@ -184,7 +184,7 @@ public class MatrixProduct {
                   ), 0, 0, newSize
                ), startrowA, startcolA,
                //P2 = (S2 = A11 + A12) * B22
-               matrixProduct_Strassen(
+               matrixProduct_DAC(
                   add_Strassen(
                      A, startrowA, startcolA, 
                      A, startrowA, startcolA+newSize, 
@@ -211,7 +211,7 @@ public class MatrixProduct {
                   add_Strassen(
 
                      //P5 = (S5 = A11 + A22) * (S6 = B11 + B22)
-                     matrixProduct_Strassen(
+                     matrixProduct_DAC(
 
                         //S5 = A11 + A22
                         add_Strassen(
@@ -243,7 +243,7 @@ public class MatrixProduct {
                   ), 0, 0,
 
                   //P3 = (S3 = A21 + A22) * B11
-                  matrixProduct_Strassen(
+                  matrixProduct_DAC(
 
                      //S3 = A21 + A22
                      add_Strassen(
@@ -262,7 +262,7 @@ public class MatrixProduct {
                ), 0, 0,
 
                //P7 = (S9 = A11 - A21) * (S10 = B11 + B12)
-               matrixProduct_Strassen(
+               matrixProduct_DAC(
 
                   //S9 = A11 - A21
                   sub_Strassen(
@@ -296,7 +296,7 @@ public class MatrixProduct {
             add_Strassen(
 
                //P3 = (S3 = A21 + A22) * B11
-               matrixProduct_Strassen(
+               matrixProduct_DAC(
 
                   //S3 = A21 + A22
                   add_Strassen(
@@ -312,7 +312,7 @@ public class MatrixProduct {
 
                ), startrowB, startcolB,
                //P4 = A22 * (S4 = B21 - B11)
-               matrixProduct_Strassen( 
+               matrixProduct_DAC( 
 
                   A, startrowA + newSize, startcolA + newSize,
                   //S4 = B21 - B11
