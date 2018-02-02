@@ -2,7 +2,7 @@
 * @Author: Thinh Luu, Chris Kim
 * @Date:   2018-01-29 23:15:14
 * @Last Modified by:   Chris Kim
-* @Last Modified time: 2018-01-30 17:58:04
+* @Last Modified time: 2018-02-02 07:42:17
 */
 
 import java.util.*;
@@ -84,6 +84,7 @@ public class MatrixProduct {
 
       int[][] product = new int[n][n];
 
+
       //base case
       if(n == 1) {
          
@@ -119,7 +120,7 @@ public class MatrixProduct {
 
                         newSize
 
-                     ), startrowA + newSize, startcolA + newSize,
+                     ), 0, 0,
                      //P4 = A22 * (S4 = B21 - B11)
                      matrixProduct_Strassen( 
 
@@ -130,9 +131,10 @@ public class MatrixProduct {
                            B, startrowB, startcolB, 
                            newSize), 0, 0,
                            newSize
-                        ), startrowA + newSize, startcolA + newSize,
+                        
+                     ), 0, 0,
                      newSize
-               ), startrowA + newSize, startrowA + newSize,
+               ), 0, 0,
                
                //P2 = (S2 = A11 + A12) * B22              
                matrixProduct_Strassen(
@@ -143,7 +145,7 @@ public class MatrixProduct {
                   ), 0, 0, 
                   B, startrowB +newSize, startcolB +newSize, 
                   newSize
-               ), startrowB +newSize, startcolB +newSize, 
+               ), 0, 0, 
                newSize
             ), 0, 0,
             // P6 = (S7 = A12 - A22) * (S8 = B21 + B22)
@@ -182,7 +184,7 @@ public class MatrixProduct {
                      B, startrowB + newSize, startcolB + newSize, 
                      newSize
                   ), 0, 0, newSize
-               ), startrowA, startcolA,
+               ), 0, 0,
                //P2 = (S2 = A11 + A12) * B22
                matrixProduct_Strassen(
                   add_Strassen(
@@ -192,7 +194,7 @@ public class MatrixProduct {
                   ), 0, 0, 
                   B, startrowB +newSize, startcolB +newSize, 
                   newSize
-               ), startrowB +newSize, startcolB +newSize, 
+               ), 0, 0, 
                newSize
             ), 0, newSize, //startrowA, startcolB + newSize, newSize
             newSize
@@ -228,7 +230,7 @@ public class MatrixProduct {
 
                         newSize
 
-                     ), startrowA + newSize, startcolA + newSize,
+                     ), 0, 0,
                      // P1 = A11 * (S1=B12-B22)
                      matrixProduct_Strassen(
                         A, startrowA, startcolA, 
@@ -237,7 +239,7 @@ public class MatrixProduct {
                            B, startrowB + newSize, startcolB + newSize, 
                            newSize
                         ), 0, 0, newSize
-                     ), startrowA, startcolA,
+                     ), 0, 0,
                      newSize
 
                   ), 0, 0,
@@ -257,7 +259,7 @@ public class MatrixProduct {
                      B, startrowB, startcolB,
                      newSize
 
-                  ), startrowB, startcolB,
+                  ), 0, 0,
                   newSize
                ), 0, 0,
 
@@ -310,7 +312,7 @@ public class MatrixProduct {
                   B, startrowB, startcolB,
                   newSize
 
-               ), startrowB, startcolB,
+               ), 0, 0,
                //P4 = A22 * (S4 = B21 - B11)
                matrixProduct_Strassen( 
 
@@ -321,7 +323,7 @@ public class MatrixProduct {
                      B, startrowB, startcolB, 
                      newSize), 0, 0,
                      newSize
-                  ), startrowA + newSize, startcolA + newSize,
+                  ), 0, 0,
                newSize
             ),
             newSize, 0,
@@ -363,10 +365,20 @@ public class MatrixProduct {
 
       for(int i = 0; i < n; i++){
          for (int j = 0; j < n; j++) {
-            product[startRow][startCol] = toFill[i][j];
+            product[startRow+i][startCol+j] = toFill[i][j];
          }
       }
 
+
+   }
+
+   private static boolean isPowerOf2(int n) {
+      if (n <= 0) {
+         return false;
+      }
+      else {
+         return Integer.bitCount(n) == 1;
+      }
    }
 
    private static void checkInputs(int[][] A, int[][] B) {
@@ -377,7 +389,7 @@ public class MatrixProduct {
       int numRowB = B.length;
 
       //throw exception if not square matrices of same size and size not power of 2
-      if(numRowA != numColA || numRowB != numColB || numRowA != numRowB || numRowA%2 != 0) {
+      if(numRowA != numColA || numRowB != numColB || numRowA != numRowB || !isPowerOf2(numRowA)) {
          throw new IllegalArgumentException();
       }
    }

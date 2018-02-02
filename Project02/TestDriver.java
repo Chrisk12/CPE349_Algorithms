@@ -1,8 +1,8 @@
 /*
 * @Author: thinhluu
 * @Date:   2018-01-30 01:40:47
-* @Last Modified by:   thinhluu
-* @Last Modified time: 2018-01-30 01:46:22
+* @Last Modified by:   Chris Kim
+* @Last Modified time: 2018-01-31 09:52:26
 */
 
 import java.io.*;
@@ -62,7 +62,7 @@ public class TestDriver{
 
          //Computing Product
          try{
-            FakeStrassen mp = new FakeStrassen();
+            MatrixProduct mp = new MatrixProduct();
             product = mp.matrixProduct_Strassen(A,B);
             printMatrix(product, numRowA, numColB);
          }
@@ -83,12 +83,7 @@ public class TestDriver{
       System.out.println("Product Matrix:");
 
       for (int i = 0; i < numRowA; i++) {
-         for (int j = 0; j < numColB; j++) {
-            
-            System.out.print(product[i][j]+ " ");
-            
-         }
-         System.out.println();
+         System.out.println(Arrays.toString(product[i]));
       }
    }
 }
