@@ -1,8 +1,8 @@
 /*
 * @Author: thinhluu
 * @Date:   2018-01-30 01:40:47
-* @Last Modified by:   thinhluu
-* @Last Modified time: 2018-01-30 01:46:22
+* @Last Modified by:   tpluu
+* @Last Modified time: 2018-02-01 23:06:06
 */
 
 import java.io.*;
@@ -62,9 +62,18 @@ public class TestDriver{
 
          //Computing Product
          try{
-            FakeStrassen mp = new FakeStrassen();
-            product = mp.matrixProduct_Strassen(A,B);
-            printMatrix(product, numRowA, numColB);
+            if(args[0].equals("D")) {
+               MatrixProduct mp = new MatrixProduct();
+               product = mp.matrixProduct_DAC(A,B);
+               System.out.print("DAC ");
+               printMatrix(product, numRowA, numColB);
+            }
+            else if(args[0].equals("S")){
+               MatrixProduct mp = new MatrixProduct();
+               product = mp.matrixProduct_Strassen(A,B);
+               System.out.print("Strassen ");
+               printMatrix(product, numRowA, numColB);
+            }
          }
          catch(IllegalArgumentException e) {
             System.out.println("Invalid Matrices");
