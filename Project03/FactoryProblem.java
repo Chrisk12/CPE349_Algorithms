@@ -1,8 +1,10 @@
 /*
-* @Author: cpesc
-* @Date:   2018-02-13 17:13:48
+
+* @Author: Chris Kim, Thinh Luu
+* @Usernames: ckim65, tpluu
 * @Last Modified by:   tpluu
-* @Last Modified time: 2018-02-14 09:16:18
+* @Last Modified time: 2018-02-14 14:33:20
+
 */
 
 import java.io.*;
