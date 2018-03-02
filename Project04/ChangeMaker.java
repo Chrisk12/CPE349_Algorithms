@@ -1,8 +1,9 @@
 /*
-* @Author: cpesc
+* @Author: Chris Kim, Thinh Luu
+* @Usernames: ckim65, tpluu
 * @Date:   2018-03-01 16:40:35
 * @Last Modified by:   Chris Kim
-* @Last Modified time: 2018-03-01 18:31:09
+* @Last Modified time: 2018-03-01 19:38:36
 */
 
 import java.lang.Integer;
@@ -11,7 +12,6 @@ import java.util.Arrays;
 
 public class ChangeMaker {
 
-    public Scanner scan = new Scanner(System.in);
 
     public static int[] change_DP(int n, int[] d) {
         int[] changeArr = new int[n + 1];
@@ -41,30 +41,22 @@ public class ChangeMaker {
                         minIndex = possibleMinIndex;
                         auxArr[j] = d[i];
                     }
-                    System.out.println("Index: " + j);
                     
                 }
                 
             }
             changeArr[j] = changeArr[minIndex] + 1;
             minIndex = null;
-            System.out.println("CHANGE: " + changeArr[j]);
 
         }
 
-        System.out.println("AUX :" + Arrays.toString(auxArr));
-        System.out.println();
-        System.out.println();
-        System.out.println("CHANGE: " + Arrays.toString(changeArr));
+
 
         while (auxLen > 0) {
 
-            System.out.println("AUXLEN: " + auxLen);
-
 
             for(int i = 0; i < d.length; i++) {
-                // System.out.println("d[i]: " + d[i]);
-                // System.out.println("arr: " + auxArr[auxLen]);
+
                 if (d[i] == auxArr[auxLen]) {
 
                     result[i] += 1;
@@ -80,18 +72,97 @@ public class ChangeMaker {
 
     }
 
+    public static int[] change_greedy(int n, int[] d) {
+        int[] result = new int[d.length];
+        int auxLen = n;
+        Integer minIndex = null;
 
+        int i = 0;
+
+        while (n > 0 && i < d.length) {
+
+            if (n >= d[i]) {
+
+                result[i] += 1;
+                n -= d[i];
+
+            }
+            else {
+                i++;
+            }
+
+        }
+
+        return result;
+
+    }
+
+    public static void printCount(int[] toPrint){
+        int count = 0;
+        for (int i = 0; i < toPrint.length; i++) {
+            
+            count += toPrint[i];
+
+        }
+        System.out.println("Optimal coin count: " + count);
+        System.out.println();
+    }
+
+    public static void printResults(int[] toPrint, int[] intD, int n){
+        boolean firstPrint = true;
+        System.out.println("Amount: " + n);
+        System.out.print("Optimal distribution: ");
+        for (int i = 0; i < toPrint.length; i++) {
+            if (toPrint[i] != 0){
+
+                if (firstPrint) {
+                    System.out.print("" + toPrint[i] + "*" + intD[i] +"c");
+                    firstPrint = false;
+                }
+                else { 
+
+                    System.out.print(" + " + toPrint[i] + "*" + intD[i] +"c");
+
+                }
+            }
+        }
+        System.out.println();
+    }
 
     public static void main(String[] args) {
-        
-        int[] intD = {100, 25,10,5,1};
-        // int[] intD = {25,12,5,1};
-        int change = 233;
+        Scanner scan = new Scanner(System.in);
+        int numDoms = -1;
+        int n = -1;
 
-        int[] Yo = change_DP(change, intD);
+        System.out.println("Enter the number of coin-denominations and the set of coin values:");
+        numDoms = scan.nextInt();
+        int [] intD = new int[numDoms];
+        for (int i = 0; i < intD.length; i++) {
+            intD[i] = scan.nextInt();
+        }
+        System.out.println();
+        while (n != 0) {
+            System.out.println("Enter a positive amount to be changed (enter 0 to quit):");
+            n =  scan.nextInt();
+            System.out.println();
 
-        System.out.println(Arrays.toString(Yo));
+            if (n == 0){
+                System.out.println("Thanks for playing. Good Bye.");
+                return;
+            }
 
+            int[] result = change_DP(n, intD);
+
+            System.out.println("DP algorithm results");
+            printResults(result,intD, n);
+            printCount(result);
+
+            result = change_greedy(n, intD);
+
+            System.out.println("Greedy algorithm results");
+            printResults(result,intD, n);
+            printCount(result);
+        }
     }
 
 }
