@@ -1,8 +1,9 @@
 /*
-* @Author: tpluu
-* @Date:   2018-03-06 18:28:48
+* @Author: Chris Kim, Thinh Luu
+* @Usernames: ckim65, tpluu
+* @Date:   2018-03-01 16:40:35
 * @Last Modified by:   tpluu
-* @Last Modified time: 2018-03-08 23:10:04
+* @Last Modified time: 2018-03-02 14:49:11
 */
 
 import java.util.Scanner;
@@ -26,6 +27,10 @@ public class DiGraphTest {
        System.out.println("-edge count (enter e)");
        System.out.println("-vertex count (enter v)");
        System.out.println("-print graph (enter p)");
+       System.out.println("-is there a path (enter i)");
+       System.out.println("-length of path (enter l)");
+       System.out.println("-shortest path (enter s)");
+       System.out.println("-breadth-first=tree (enter b)");
        System.out.println("-Quit (enter q)");
 
        //flushing newline character
@@ -41,6 +46,10 @@ public class DiGraphTest {
                 option.equals("v") ||
                 option.equals("p") ||
                 option.equals("q") ||
+                option.equals("i") ||
+                option.equals("l") ||
+                option.equals("s") ||
+                option.equals("b") ||
                 option.equals("t"))  {
                 
                 switch(option) {
@@ -80,6 +89,45 @@ public class DiGraphTest {
                         graph.print();
                         break;
 
+                    case "i":
+                         from = scan.nextInt();
+                         to = scan.nextInt();
+
+                        //flushing newline char
+                        scan.nextLine();
+
+                        System.out.println(graph.isTherePath(from, to));
+                        break;
+
+                    case "l":
+                        from = scan.nextInt();
+                        to = scan.nextInt();
+
+                        //flushing newline char
+                        scan.nextLine();
+
+                        System.out.println(graph.lengthOfPath(from, to));
+                        break;
+                        
+                    case "s":
+                         from = scan.nextInt();
+                         to = scan.nextInt();
+
+                        //flushing newline char
+                        scan.nextLine();
+
+                        graph.printPath(from,to);
+                        break;  
+
+                    case "b":
+                         int vertexNum = scan.nextInt();
+
+                        //flushing newline char
+                        scan.nextLine();
+
+                        graph.printTree(vertexNum);
+                        break;           
+
                     case "t":
                         try {
                             
@@ -106,6 +154,7 @@ public class DiGraphTest {
             }
             option = scan.nextLine();
         }
+        
         System.out.println("Good bye.");
     }
 }

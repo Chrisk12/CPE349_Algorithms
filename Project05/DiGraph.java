@@ -1,8 +1,9 @@
 /*
-* @Author: thinhluu
-* @Date:   2018-03-05 18:21:13
+* @Author: Chris Kim, Thinh Luu
+* @Usernames: ckim65, tpluu
+* @Date:   2018-03-01 16:40:35
 * @Last Modified by:   tpluu
-* @Last Modified time: 2018-03-08 23:08:16
+* @Last Modified time: 2018-03-02 14:49:11
 */
 
 import java.util.*;
@@ -135,5 +136,157 @@ public class DiGraph {
         }
 
         return IN;
+    }
+
+    private class VertexInfo {
+
+        int distance;
+        int parent;
+
+        public VertexInfo (int distance, int parent) {
+            this.distance = distance;
+            this.parent = parent;
+        }
+
+    }
+
+    private VertexInfo[] BFS(int s) {
+
+        int lenOfGraph = linkedListArray.length;
+        VertexInfo[] result = new VertexInfo[lenOfGraph];
+
+        for (int i = 0; i < lenOfGraph; i++) {
+
+            result[i] = new VertexInfo(-1, -1);
+            
+
+        }
+
+        result[s].distance = 0;
+
+        Queue<Integer> q = new LinkedList<Integer>();
+
+        q.add(new Integer(s));
+
+        while(q.size() > 0) {
+            Integer u = q.remove();
+            for(int j = 0; j < linkedListArray[u].size(); j++) {
+                int node = linkedListArray[u].get(j) - 1;
+
+                if (result[node].distance == -1) {
+                    result[node].distance = result[u].distance + 1;
+                    result[node].parent = u;
+                    q.add(new Integer(node));
+                }
+
+            }
+
+        }
+        return result;
+    }
+
+    public boolean isTherePath(int from, int to) {
+
+        from -= 1;
+        to -= 1;
+
+        VertexInfo[] results = BFS(from);
+        if (results[to].distance != -1) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+
+    }
+
+    public int lengthOfPath(int from, int to) {
+        from -= 1;
+        to -= 1;
+
+        VertexInfo[] results = BFS(from);
+
+        return results[to].distance;
+
+    }
+
+    public void printPath(int from, int to) {
+
+        from -= 1;
+        to -= 1;
+
+        if (isTherePath(from+1, to+1)) {
+
+            VertexInfo[] results = BFS(from);
+            int i = to;
+            String path = "";
+            while (results[i].parent != -1) {
+
+                path = "->"+ (i + 1) + path; 
+                i = results[i].parent;
+            }
+            System.out.println("" + (i + 1) + path);  
+        }
+        else {
+            System.out.println("There is no path");
+        }
+
+    }
+
+    private class TreeNode{
+
+        int vertexNum;
+        LinkedList<TreeNode> list;
+
+        public TreeNode(int vertexNum, LinkedList<TreeNode> list) {
+
+            this.vertexNum = vertexNum;
+            this.list = list;
+        }
+    }
+
+    private TreeNode buildTree(int s) {
+
+        VertexInfo[] results = BFS(s-1);
+        TreeNode[] nodes = new TreeNode[linkedListArray.length];
+
+        for(int i = 0; i < linkedListArray.length; i++) {
+
+            nodes[i] = new TreeNode(i+1, new LinkedList<TreeNode>());
+
+        }
+
+        for (int i = 0; i < results.length; i++) {
+
+            if (results[i].parent != -1) {
+
+                nodes[results[i].parent].list.add(nodes[i]);
+
+            }
+
+        }
+
+        return nodes[s-1];
+
+    }
+
+    public void printTree(int s) {
+
+        TreeNode root = buildTree(s);
+        recursiveprint(root, "");
+
+
+    }
+
+    private void recursiveprint(TreeNode s, String tabs){
+
+        System.out.println(tabs + s.vertexNum);
+        if (s.list.size() > 0){
+            for(int i = 0; i < s.list.size(); i++){
+                recursiveprint(s.list.get(i), tabs + "    ");
+            }
+        }
+
     }
 }
